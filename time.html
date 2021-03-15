@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+    </head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 100px;
+            display: flex;
+            align-items: center;
+            background:black;
+        }
+        .datetime{
+            color:white;
+            background: black;
+            width: 250px;
+            padding: 15px 10px;
+            border: 6px solid red;
+            border-radius: 15px;
+            padding-left: 5px;
+            position: absolute;
+            top : 50%;
+            left : 50%;
+            transform: translate(-50%,-50%);
+        }
+        .time{
+            position: relative;
+            margin: 0 6px;
+            font-weight: 600px;
+            display: flex;
+        }
+        .time input{
+            width: 20px;
+            height: 20px;
+        }
+        h4{
+            text-align: center;
+        }
+    </style>
+    <body>
+        <div class="datetime">
+            <h4>The Time</h4>
+            <div class="time">
+                <span id="hours"></span>
+                <input id="time" value="0">
+                <input id="t" value="0">
+                <span id="minutes" >:</span>
+                <input id="minute" value="0">
+                <input id="m" value="0">
+                <span id="seconds">:</span>
+                <input id="second" value="0">
+                <input id="s" value="0">
+                <button type="button" onclick="start()" style="margin-left:5px">start</button>
+                <button type="button" onclick="restart" style="margin-left:5px">restart</button>
+            </div>
+        </div>
+        <script>
+            
+            function start() {
+
+                setInterval(changetime, 1000);
+            }
+            function changetime(){
+                var h1,h2,m1,m2,s1,s2;
+                h1=document.getElementById("time").value % 10;
+                h2=document.getElementById("t").value % 10;
+                let h = h1*10 + h2;
+                
+                m1=document.getElementById("minute").value % 10;
+                
+                m2=document.getElementById("m").value % 10;
+                let m = m1*10 + m2;
+                s1=document.getElementById("second").value % 10;
+                
+                s2=document.getElementById("s").value % 10;
+                let s = s1*10 + s2;
+                //console.log("S : ", s);
+                if (s) {
+                    s--;
+                    document.getElementById("second").value = parseInt(s / 10) %10;
+                    document.getElementById("s").value = s % 10;
+                    //console.log(document.getElementById("second").value,  '    '  , document.getElementById("s").value )
+                    
+                } else if (m) {
+                    m--;
+                    document.getElementById("minute").value =parseInt( m / 10) %10;
+                    document.getElementById("m").value = m % 10;
+                    document.getElementById("second").value = 5;
+                    document.getElementById("s").value = 9;
+                    s = 59;
+                } else if (h)
+                {
+                    h--;
+                    document.getElementById("time").value = parseInt(h / 10)%10;
+                    document.getElementById("t").value = h % 10;
+                    document.getElementById("minute").value= 5;
+                    document.getElementById("m").value = 9;
+                    document.getElementById("second").value = 5;
+                    document.getElementById("s").value = 9;
+                    m=59;
+                    s=59;
+                } else 
+                {
+                    h1 = h2 =m1 =m2 =s1 =s2 =0;
+                    return;
+                }
+                //console.log(h,m,s);
+        }
+        </script>
+    </body>
+</html>
